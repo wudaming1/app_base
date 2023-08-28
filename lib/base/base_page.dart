@@ -4,64 +4,59 @@ import 'package:app_base/base/page_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-abstract class BasePage<T extends BaseController> extends StatelessWidget{
+abstract class BasePage<T extends BaseController> extends StatelessWidget {
+  const BasePage({super.key, this.tag});
 
-    BasePage({super.key});
+  final String? tag;
 
-   T?  _controller;
-   T get controller => _controller!;
+  T get controller => Get.find<T>(tag: tag);
 
   @override
   Widget build(BuildContext context) {
+    return GetBuilder(
+      init: onInitController(),
+      builder: (T controller) {
+        controller.buildContext = context;
+        Widget body;
+        switch (controller.pageState) {
+          case PageState.idle:
+            body = buildPage(context);
+            break;
+          case PageState.busy:
+            body = buildBusyPage(context);
+            break;
+          case PageState.error:
+            body = buildErrorPage(context);
+            break;
+          case PageState.empty:
+            body = buildEmptyPage(context);
+            break;
+        }
 
-     return GetBuilder(
-       init: onInitController(),
-       builder: (T controller) {
-         _controller = controller;
-      controller.buildContext = context;
-      Widget body;
-
-      switch(controller.pageState){
-        case PageState.idle:
-          body = buildPage(context);
-          break;
-        case PageState.busy:
-          body = buildBusyPage(context);
-          break;
-        case PageState.error:
-          body = buildErrorPage(context);
-          break;
-        case PageState.empty:
-          body = buildEmptyPage(context);
-          break;
-      }
-
-      return Scaffold(
-        body: body,
-      );
-    },);
+        return Scaffold(
+          body: body,
+        );
+      },
+    );
   }
 
-  void onPageInit(){}
+  void onPageInit() {}
 
-  void onPageFinish(){}
+  void onPageFinish() {}
 
-   T onInitController();
+  T onInitController();
 
   Widget buildPage(BuildContext context);
 
-  Widget buildErrorPage(BuildContext context){
+  Widget buildErrorPage(BuildContext context) {
     return BasePageConfig.errorPageBuilder(context);
   }
 
-  Widget buildEmptyPage(BuildContext context){
+  Widget buildEmptyPage(BuildContext context) {
     return BasePageConfig.emptyPageBuilder(context);
-
   }
 
-  Widget buildBusyPage(BuildContext context){
+  Widget buildBusyPage(BuildContext context) {
     return BasePageConfig.busyPageBuilder(context);
   }
-
-
 }
