@@ -14,6 +14,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
+      tag: tag,
       init: onInitController(),
       builder: (T controller) {
         controller.buildContext = context;
