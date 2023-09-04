@@ -15,6 +15,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       init: onInitController(),
+      tag: tag,
       builder: (T controller) {
         controller.buildContext = context;
         Widget body;
@@ -35,6 +36,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
 
         return Scaffold(
           body: body,
+          bottomNavigationBar: buildBottomNavBar(context),
         );
       },
     );
@@ -59,4 +61,9 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
   Widget buildBusyPage(BuildContext context) {
     return BasePageConfig.busyPageBuilder(context);
   }
+
+  Widget? buildBottomNavBar(BuildContext context){
+    return null;
+  }
+
 }
