@@ -9,13 +9,15 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
 
   final String? tag;
 
+  String? get title;
+
   T get controller => Get.find<T>(tag: tag);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: onInitController(),
       tag: tag,
+      init: onInitController(),
       builder: (T controller) {
         controller.buildContext = context;
         Widget body;
@@ -36,6 +38,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
 
         return Scaffold(
           body: body,
+          appBar: buildAppBar(context),
           bottomNavigationBar: buildBottomNavBar(context),
         );
       },
@@ -60,6 +63,10 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
 
   Widget buildBusyPage(BuildContext context) {
     return BasePageConfig.busyPageBuilder(context);
+  }
+
+  PreferredSizeWidget? buildAppBar(BuildContext context) {
+    return BasePageConfig.appBarBuilder(context);
   }
 
   Widget? buildBottomNavBar(BuildContext context){
