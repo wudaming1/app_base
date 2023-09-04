@@ -7,7 +7,7 @@ final List<GetPage> pages = [
   GetPage(
       name: '/',
       page: () {
-        return HomePage(tag: Get.parameters[_tagName]);
+        return HomePage();
       }),
   // GetPage(name: '/second', page: () => Second()),
   // GetPage(name: '/third', page: () => Third(), transition: Transition.zoom),

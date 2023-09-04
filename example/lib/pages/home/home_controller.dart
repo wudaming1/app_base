@@ -4,7 +4,7 @@ class HomeController extends BaseController{
 
   int currentPageIndex = 0;
 
-  void onNavBarChange(int index){
+  void onDestinationSelected(int index){
     currentPageIndex = index;
     update();
   }

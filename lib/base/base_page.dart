@@ -9,7 +9,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
 
   final String? tag;
 
-  String? get title;
+  String? get title => null;
 
   T get controller => Get.find<T>(tag: tag);
 
