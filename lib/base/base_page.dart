@@ -37,6 +37,7 @@ abstract class BasePage<T extends BaseController> extends StatelessWidget {
         }
 
         return Scaffold(
+          backgroundColor: Colors.white,
           body: body,
           appBar: buildAppBar(context),
           bottomNavigationBar: buildBottomNavBar(context),

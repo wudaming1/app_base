@@ -1,4 +1,6 @@
 import 'package:app_base/app_base.dart';
+import 'package:example/pages/sliver_architecture/sliver_architecture_page.dart';
+import 'package:example/translation.dart';
 import 'package:flutter/material.dart';
 
 import 'home_controller.dart';
@@ -6,9 +8,26 @@ import 'home_controller.dart';
 class HomePage extends BasePage<HomeController> {
   const HomePage({super.key});
 
+  static const String path = '/';
+
   @override
   Widget buildPage(BuildContext context) {
-    return Center(child: Text("home"),);
+    return PageView(
+      controller: controller.pageController,
+      onPageChanged: controller.onPageChanged,
+      children: [
+        Container(),
+        Container(),
+        Container(
+          alignment: Alignment.center,
+          child: ElevatedButton(
+              onPressed: () {
+                Get.toNamed(SliverArchitecturePage.path);
+              },
+              child: const Text(Translation.sliver)),
+        )
+      ],
+    );
   }
 
   @override
@@ -30,7 +49,7 @@ class HomePage extends BasePage<HomeController> {
         NavigationDestination(
           selectedIcon: Icon(Icons.school),
           icon: Icon(Icons.school_outlined),
-          label: 'School',
+          label: Translation.sliver,
         ),
       ],
     );
