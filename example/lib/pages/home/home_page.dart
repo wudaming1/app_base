@@ -1,4 +1,5 @@
 import 'package:app_base/app_base.dart';
+import 'package:example/pages/gesture/gesture_page.dart';
 import 'package:example/pages/sliver_architecture/sliver_architecture_page.dart';
 import 'package:example/translation.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,19 @@ class HomePage extends BasePage<HomeController> {
       children: [
         Container(),
         Container(),
-        Container(
-          alignment: Alignment.center,
-          child: ElevatedButton(
-              onPressed: () {
-                Get.toNamed(SliverArchitecturePage.path);
-              },
-              child: const Text(Translation.sliver)),
+        Column(
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(GesturePage.path);
+                },
+                child: const Text(Translation.gesturePage)),
+            ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(SliverArchitecturePage.path);
+                },
+                child: const Text(Translation.sliver)),
+          ],
         )
       ],
     );

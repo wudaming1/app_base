@@ -1,4 +1,5 @@
 import 'package:app_base/app_base.dart';
+import 'package:example/pages/gesture/gesture_page.dart';
 import 'package:example/pages/home/home_page.dart';
 import 'package:example/pages/sliver_architecture/sliver_architecture_page.dart';
 
@@ -11,5 +12,10 @@ final List<GetPage> pageList = [
       name: SliverArchitecturePage.path,
       page: () {
         return const SliverArchitecturePage();
+      }),
+  GetPage(
+      name: GesturePage.path,
+      page: () {
+        return const GesturePage();
       }),
 ];
